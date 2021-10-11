@@ -1,0 +1,4 @@
+name: cat-cs
+depend: cubical
+include: src
+flags: --cubical
