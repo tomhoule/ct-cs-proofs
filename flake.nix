@@ -9,13 +9,20 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; };
-      in {
+      in
+      {
         defaultPackage = pkgs.cowsay;
         devShell = pkgs.mkShell {
           buildInputs = [ (pkgs.agda.withPackages (p: [ p.cubical ])) ];
-          shellHook = ''
-            export CUBICAL_AGDA_PATH=${pkgs.agdaPackages.cubical}
-          '';
+          shellHook =
+            let
+              emacsPkg = pkgs.emacsWithPackages (p: [ p.agda2-mode ]);
+            in
+            ''
+              alias emacs="${emacsPkg}/bin/emacs --no-init-file --load mini-init.el"
+            '';
         };
       });
 }
+
+
