@@ -26,6 +26,7 @@ isSimple g = ∀ (a b : node g) → isProp (arrow g a b)
 
 -- The graph of sets and functions.
 -- Example 1.3.3
+
 SetGraph : Graph
 SetGraph = graph Set (λ a b → (a → b))
 
@@ -33,4 +34,5 @@ EmptyGraph : Graph
 EmptyGraph = graph ⊥ (λ a b → ⊥)
 
 EmptyGraphisDiscrete : isDiscrete EmptyGraph
-EmptyGraphisDiscrete = λ { (elem, helem) → {!!} }
+EmptyGraphisDiscrete = λ { ((elem1 , elem2) , ()) }
+
